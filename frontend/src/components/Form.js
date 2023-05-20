@@ -69,7 +69,9 @@ const Form = ({ getUsers, onEdit, setOnEdit }) => {
 
     if (onEdit) {
       await axios
-        .put("http://localhost:8800/api/users" + onEdit.id, {
+        // .put("http://localhost:8800/api/users" + onEdit.id, {
+          .put("http://localhost:8800/api/users", {
+          id: onEdit.id,
           name: user.name.value,
           email: user.email.value,
           mobile: user.mobile.value,

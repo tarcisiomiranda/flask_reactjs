@@ -27,10 +27,6 @@ scheduler = APScheduler()
 # API Rest
 @app.route('/api/users', methods=['GET', 'POST', 'PUT'])
 def get_users():
-    # my_sql = MySQLAddOn()
-    # # print('-----------> ', my_sql.__dict__)
-    # my_sql.conn.autocommit = True
-    # cursor = my_sql.conn.cursor(dictionary=True)
     try:
         if request.method == 'POST':
             data = request.json
@@ -46,13 +42,9 @@ def get_users():
             query = "INSERT INTO users (name, email, mobile, birth_date) VALUES (%s, %s, %s, %s)"
             values = (data['name'], data['email'], data['mobile'], data['birth_date'])
 
-            # Executar a consulta
             cursor.execute(query, values)
 
-            # Commit das alterações
-            # conn.commit()
-
-            return jsonify({'message': 'Usuário criado com sucesso'}), 201
+            return jsonify({'message': 'User created successfully'}), 201
 
         if request.method == 'PUT':
             # TODO
@@ -60,20 +52,15 @@ def get_users():
             my_sql.conn.autocommit = True
             cursor = my_sql.conn.cursor(dictionary=True)
 
+            data = request.json
             print('PUT > ', data)
 
-            # query = "UPDATE users SET name = %s, email = %s, mobile = %s, birth_date = %s WHERE id = %s"
-            # values = (data['name'], data['email'], data['mobile'], data['birth_date'], user_id)
+            query = "UPDATE users SET name = %s, email = %s, mobile = %s, birth_date = %s WHERE id = %s"
+            values = (data['name'], data['email'], data['mobile'], data['birth_date'], data['id'])
 
-            # Execute a query de atualização
-            # cursor.execute(query, values)
-
-            # name = data.get('name')
-            # email = data.get('email')
-            # fone = data.get('fone')
-            # data_nascimento = data.get('data_nascimento')
-
-            return 'Solicitação PUT recebida'
+            # TODO - Validar update
+            cursor.execute(query, values)
+            return jsonify({'message': 'User updated successfully'}), 201
 
         elif request.method == 'GET':
             # TODO
