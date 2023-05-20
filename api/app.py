@@ -25,7 +25,7 @@ scheduler = APScheduler()
 #     return cursor
 
 # API Rest
-@app.route('/api/users', methods=['GET', 'POST', 'PUT'])
+@app.route('/api/users', methods=['GET', 'POST', 'PUT', 'DELETE'])
 def get_users():
     try:
         if request.method == 'POST':
@@ -46,7 +46,7 @@ def get_users():
 
             return jsonify({'message': 'User created successfully'}), 201
 
-        if request.method == 'PUT':
+        elif request.method == 'PUT':
             # TODO
             my_sql = MySQLAddOn()
             my_sql.conn.autocommit = True
@@ -62,6 +62,21 @@ def get_users():
             cursor.execute(query, values)
             return jsonify({'message': 'User updated successfully'}), 201
 
+        elif request.method == 'DELETE':
+            # TODO
+            my_sql = MySQLAddOn()
+            my_sql.conn.autocommit = True
+            cursor = my_sql.conn.cursor(dictionary=True)
+
+            data = request.get_json()
+            print('DELETE > ', data)
+
+            # TODO - Validar delte
+            delete_query = "DELETE FROM users WHERE id = %s"
+            cursor.execute(delete_query, (int(data['id']),))
+
+            return jsonify({'message': 'User deleted successfully'}), 201
+
         elif request.method == 'GET':
             # TODO
             my_sql = MySQLAddOn()
@@ -73,6 +88,9 @@ def get_users():
             res = cursor.fetchall()
 
             return jsonify(res)
+
+        else:
+            return jsonify({'message': 'no method send'}), 201
 
     except Exception as e:
         return jsonify('error: {}'.format(e))

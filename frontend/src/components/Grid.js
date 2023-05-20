@@ -48,12 +48,21 @@ const Grid = ({ users, setUsers, setOnEdit }) => {
 
   const handleDelete = async (id) => {
     await axios
-      .delete("http://localhost:8800/api/users" + id)
+      .delete("http://localhost:8800/api/users", {
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        data: {
+          id: id
+        }
+      })
       .then(({ data }) => {
         const newArray = users.filter((user) => user.id !== id);
 
         setUsers(newArray);
-        toast.success(data);
+        // Se o JSON da API responde como message : alguma msg
+        // voce precisa acessar o objeto dela usando o "."
+        toast.success(data.message);
       })
       .catch(({ data }) => toast.error(data));
 

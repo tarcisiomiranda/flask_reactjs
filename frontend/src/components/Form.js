@@ -77,7 +77,7 @@ const Form = ({ getUsers, onEdit, setOnEdit }) => {
           mobile: user.mobile.value,
           birth_date: user.birth_date.value,
         })
-        .then(({ data }) => toast.success(data))
+        .then(({ data }) => toast.success(data.message))
         .catch(({ data }) => toast.error(data));
     } else {
       await axios
@@ -87,7 +87,7 @@ const Form = ({ getUsers, onEdit, setOnEdit }) => {
           mobile: user.mobile.value,
           birth_date: user.birth_date.value,
         })
-        .then(({ data }) => toast.success(data))
+        .then(({ data }) => toast.success(data.message))
         .catch(({ data }) => toast.error(data));
     }
 
