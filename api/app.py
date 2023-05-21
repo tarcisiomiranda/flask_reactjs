@@ -8,6 +8,7 @@ from flask_cors import CORS, cross_origin
 import json
 import time
 import sys
+import re
 
 class ConfigScheduler:
     SCHEDULER_API_ENABLED = True
@@ -17,12 +18,37 @@ app = Flask(__name__)
 CORS(app)
 scheduler = APScheduler()
 
-# def db():
-#     my_sql = MySQLAddOn()
-#     my_sql.conn.autocommit = True
-#     cursor = my_sql.conn.cursor(dictionary=True)
+def filter_escolha(lista_original):
+    filtered = []
+    _pattern = r'(\d{1,2})(.*)'
 
-#     return cursor
+    for linha in lista_original:
+        if re.match(_pattern, linha):
+            res = re.split(_pattern, linha)
+            res_clear = [item.strip() for item in res if item.strip()]
+            print('LIMPOS -> ', 'Total: ', len(res_clear), 'Separados: ', res_clear)
+
+            if len(res_clear) == 2:
+                filtered.append({res_clear[0] : res_clear[1]})
+
+    return filtered
+
+@app.route('/api/escolha', methods=['GET', 'POST', 'PUT', 'DELETE'])
+def get_escolhidos():
+    if request.method == 'POST':
+        data = request.json
+        print('ESCOLHA POST ', data)
+
+        jogadores = []
+        for d in data['names'].splitlines():
+            jogadores.append(d)
+
+        filtrado = filter_escolha(jogadores)
+        print('| == filtrado ==> ', filtrado)
+
+        return jsonify({'message': filtrado})
+    else:
+        return jsonify({'message': 'Nao foi post'})
 
 # API Rest
 @app.route('/api/users', methods=['GET', 'POST', 'PUT', 'DELETE'])

@@ -1,10 +1,14 @@
+import { useEffect, useState } from "react";
+// eslint-disable-next-line
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import GlobalStyle from "./styles/global";
 import styled from "styled-components";
 import Form from "./components/Form.js";
 import Grid from "./components/Grid";
-import { useEffect, useState } from "react";
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import Escolha from "./components/Escolha";
 import axios from "axios";
 
 const Container = styled.div`
@@ -37,13 +41,19 @@ function App() {
   }, [setUsers]);
 
   return (
-    <>
+    <>  
       <Container>
-        <Title>USUÁRIOS</Title>
+        <Title>USERS</Title>
         <Form onEdit={onEdit} setOnEdit={setOnEdit} getUsers={getUsers} />
         <Grid setOnEdit={setOnEdit} users={users} setUsers={setUsers} />
       </Container>
       <ToastContainer autoClose={3600} position={toast.POSITION.TOP_RIGHT} />
+
+      <Container>
+        <Title>RANDOM</Title>
+        <Escolha />
+      </Container>
+
       <GlobalStyle />
     </>
   );
