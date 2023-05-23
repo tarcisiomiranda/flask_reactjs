@@ -7,3 +7,6 @@ https://fkhadra.github.io/react-toastify/positioning-toast/
 
 # Developer Tools
 https://react.dev/learn/react-developer-tools
+
+# Select Reactjs
+https://react-select.com/home#getting-started

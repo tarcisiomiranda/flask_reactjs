@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { toast } from "react-toastify";
 import styled from "styled-components";
+import Divisao from "./Divisao";
 import axios from 'axios';
 
 const FormContainer = styled.form`
@@ -144,14 +145,15 @@ function Escolha() {
             <Label>
                 Number:
                 <InputArea>
-                <input
+                {/* <input
                     type="number"
                     name="number"
                     min={2}
                     max={4}
                     value={inputData.number}
                     onChange={handleChange}
-                />
+                /> */}
+                <Divisao />
                 </InputArea>
             </Label>
             <Button type="submit">Sortear</Button>
