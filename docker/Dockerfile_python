@@ -1,0 +1,13 @@
+FROM alpine:3.16
+
+# --- Install Python Flask ---
+RUN apk add python3 \
+    && apk add py3-pip \
+    && mkdir -p /srv/python
+
+# --- Files to Run ---
+COPY python/requirements.txt /src/python/requirements.txt
+RUN pip install -r /src/python/requirements.txt
+COPY python/app.py /src/python/app.py
+
+CMD ["/usr/bin/python3" "/src/python/app.py"]

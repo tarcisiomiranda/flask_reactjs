@@ -10,3 +10,6 @@ https://react.dev/learn/react-developer-tools
 
 # Select Reactjs
 https://react-select.com/home#getting-started
+
+# Ver sobre esse CORs scanner
+https://pypi.org/project/cors/
