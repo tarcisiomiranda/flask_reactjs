@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { toast } from "react-toastify";
 import styled from "styled-components";
-import Divisao from "./Divisao";
+import Divisao from "../components/Divisao";
+import Navbar from '../components/NavBar';
 import axios from 'axios';
 
 const FormContainer = styled.form`
@@ -128,6 +129,7 @@ function Escolha() {
 
   return (
     <>
+      <Navbar />
       {/* <div> */}
         <FormContainer onSubmit={handleSubmit}>
             <Label>
