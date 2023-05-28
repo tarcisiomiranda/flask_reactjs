@@ -1,0 +1,18 @@
+FROM alpine:3.16
+
+WORKDIR /srv
+
+RUN apk add python3 \
+    && apk add py3-pip \
+    && apk add tzdata \
+    && mkdir -p /srv
+
+RUN echo "America/Sao_Paulo" >  /etc/timezone
+
+ADD ./api/requirements.txt ./
+ADD ./api/mysql_addon.py ./
+ADD ./api/app.py ./
+
+RUN pip install -r /srv/requirements.txt
+
+CMD ["/usr/bin/python3", "/srv/app.py"]

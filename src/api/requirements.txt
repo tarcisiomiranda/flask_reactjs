@@ -1,0 +1,6 @@
+Flask
+Flask-Cors
+Flask-APScheduler
+mysql-connector-python
+colorama
+pytz

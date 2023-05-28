@@ -1,3 +1,0 @@
-APScheduler
-mysql-connector-python
-Flask-Cors
