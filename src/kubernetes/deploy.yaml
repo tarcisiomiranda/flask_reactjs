@@ -1,17 +1,25 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: python_reactjs
+  name: python-reactjs
+  labels:
+    app: python-reactjs
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: python_reactjs
+      app: python-reactjs
   template:
     metadata:
       labels:
-        app: python_reactjs
+        app: python-reactjs
     spec:
+      volumes:
+        - name: mysql-dump
+          emptyDir: {}
+        - name: mysql-data
+          emptyDir: {}
+
       containers:
         - name: mariadb
           image: chephei/maria:1.0
@@ -69,11 +77,5 @@ spec:
               memory: 256Mi
               cpu: '1'
             requests:
-              cpu: '0.5'
+              cpu: "0.25"
               memory: 128Mi
-
-  volumes:
-    - name: mysql-dump
-      emptyDir: {}
-    - name: mysql-data
-      emptyDir: {}

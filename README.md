@@ -37,3 +37,15 @@ docker build -f src/docker/Dockerfile_maria -t chephei/maria:1.0 src/
 ```
 docker-compose up -d
 ```
+
+https://snigdhasambit.medium.com/manage-kubernetes-secrets-in-git-with-gpg-and-sops-bcf52398733
+https://docs.technotim.live/posts/install-mozilla-sops/
+https://fluxcd.io/flux/guides/mozilla-sops/
+## Install support PGP
+brew install gnupg sops
+apt install gnupg sops
+
+# Generate schema.sql
+```
+mysqldump -u root -p --no-data meufutebol > schema.sql
+```

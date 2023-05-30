@@ -102,5 +102,15 @@ do
     echo -e "[___PRE-EXEC___] -- \e[31mDISABLE\e[39m";
 done
 
+# create my.cnf for auto login
+cat <<EOF > ~/.my.cnf
+[client]
+user=root
+password=${MYSQL_PASSWORD}
+EOF
+
+chmod 600 ~/.my.cnf
+echo -e "[___MY.CNF___] -- \e[32mCREATE WITH SUCCESS\e[39m";
+
 echo -e "[ \033[0;35mMARIADB\033[0m ] -- \e[32mSTARTED\e[39m"
 exec /usr/bin/mysqld --user=mysql --console --skip-name-resolve --skip-networking=0 $@
